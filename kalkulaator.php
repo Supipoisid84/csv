@@ -31,10 +31,36 @@
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <h1>Kalkulaator</h1>
+            <form>
+                Hind <input type="number" name="hind"><br>
+                Inimeste arv <input type="number" name="arv"><br>
+                Lisateenused <select name="lisa" id="lisa">
+                <option value="10">giid</option>
+                <option value="20">kindlustus</option>
+                </select>
+                <br>
+                <input type="submit" value="Saada">
+            </form>
+
+            <?php
+            	//lisab vormist saadud andmed muutujasse
+                $hind = $_GET['hind'];
+                $arv = $_GET['arv'];
+                $lisa = $_GET['lisa'];
+                
+                echo 'Summa: '.$hind*$arv+$lisa.'€';
+                $allikas = 'orders.txt'; 
+                $minu_fail = fopen($allikas, 'w'); 
+                //lisatav tekst 
+                $tekst = 'Summa: '.$hind*$arv+$lisa.'€'; 
+                //faili kirjutamine 
+                fwrite($minu_fail, $tekst); 
+                fclose($minu_fail);
+            ?>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2026</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

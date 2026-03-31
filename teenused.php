@@ -31,10 +31,41 @@
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <h1>Teenused</h1>
+            <?php
+                $allikas = 'trips.csv';
+                $minu_csv = fopen($allikas, 'r') or die('Ei leia faili!');
+                fgetcsv($minu_csv, filesize($allikas), ';');
+                // fgetcsv($minu_csv, 0, ',');
+                echo '<div class="row gx-4 gx-lg-5">';
+                while(($rida = fgetcsv($minu_csv, 0, ',')) !== false){
+                 // CSV struktuur:
+                // 0 = riik
+                // 1 = hind
+                // 2 = rating
+                // 3 = kirjeldus
+
+                echo '
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">'.$rida[0].'</h2>
+                            <p><strong>Hind:</strong> '.$rida[1].'</p>
+                            <p><strong>Hinne:</strong> '.$rida[2].'/5</p>
+                            <p class="card-text">'.$rida[3].'</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary btn-sm" href="#">Lisa ostukorvi</a>
+                        </div>
+                    </div>
+                </div>';
+                }
+                echo '</div>';
+                fclose($minu_csv);
+            ?>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2026</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

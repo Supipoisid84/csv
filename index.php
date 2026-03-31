@@ -1,3 +1,9 @@
+<?php
+$dir = "reklaam/";
+$images = array_values(array_filter(scandir($dir), function($file) {
+    return preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $file);
+}));
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,14 +36,23 @@
         </nav>
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
-            <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light">Business Name or Tagline</h1>
-                    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                    <a class="btn btn-primary" href="#!">Call to Action!</a>
-                </div>
+            <!-- carousel-->
+            <div id="carouselExample" class="carousel slide mt-4">
+            <div class="carousel-inner">
+                <?php foreach ($images as $index => $img): ?>
+                            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                <img src="<?php echo $dir . $img; ?>" class="d-block w-100" alt="Pilt">
+                            </div>
+                        <?php endforeach; ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
             </div>
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
